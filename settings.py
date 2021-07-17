@@ -4,4 +4,4 @@ class Settings:
         # Ustawienia ekranu
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (106, 90, 205)
+        self.bg_color = (230, 230, 230)
