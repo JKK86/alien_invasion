@@ -12,6 +12,8 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode((1200, 800))
         pygame.display.set_caption("Alien Invasion")
 
+        self.bg_color = (106, 90, 205)
+
     def run_game(self):
         """Rozpoczęcie pętli głównej gry"""
         while True:
@@ -19,6 +21,9 @@ class AlienInvasion:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+
+            # Wypełnienie tła utworzonym kolorem
+            self.screen.fill(self.bg_color)
 
             # Wyświetlanie ostatnio zmodyfikowanego ekranu
             pygame.display.flip()
