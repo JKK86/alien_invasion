@@ -2,17 +2,17 @@ import sys
 
 import pygame
 
+from settings import Settings
+
 
 class AlienInvasion:
     """ Ogólna klasa do zarządzania sposobem działania gry"""
 
     def __init__(self):
         pygame.init()
-
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.settings = Settings()
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
-
-        self.bg_color = (106, 90, 205)
 
     def run_game(self):
         """Rozpoczęcie pętli głównej gry"""
@@ -23,7 +23,7 @@ class AlienInvasion:
                     sys.exit()
 
             # Wypełnienie tła utworzonym kolorem
-            self.screen.fill(self.bg_color)
+            self.screen.fill(self.settings.bg_color)
 
             # Wyświetlanie ostatnio zmodyfikowanego ekranu
             pygame.display.flip()
