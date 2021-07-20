@@ -12,7 +12,16 @@ class AlienInvasion:
     def __init__(self):
         pygame.init()
         self.settings = Settings()
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # Uruchomienie gry oknie
+        # self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # Uruchomienie gry w trybie pełnoekranowym
+        # self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
+        self.screen = pygame.display.set_mode((0, 0), pygame.NOFRAME)
+        pygame.display.toggle_fullscreen()
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
+
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
@@ -54,6 +63,8 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_ESCAPE:
+            sys.exit()
 
 
 if __name__ == '__main__':
