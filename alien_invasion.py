@@ -70,8 +70,9 @@ class AlienInvasion:
 
     def fire_bullet(self):
         """Utworzenie nowego pocisku i wyświetlenie go na ekranie"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _update_screen(self):
         """Uaktualnianie obrazów na ekranie i przejścia do nowego ekranu"""
