@@ -18,3 +18,14 @@ class Bullet(Sprite):
 
         # Położenie pocisku zdefiniowane za pomocą wartości zmiennoprzecinkowej
         self.y = float(self.rect.y)
+
+    def update(self):
+        """Ruch pocisku na ekranie"""
+        # Uaktualnienie położenia pocisku
+        self.y -= self.settings.bullet_speed
+        # Uaktualnienie położenia prostokąta pocisku
+        self.rect.y = self.y
+
+    def draw_bullet(self):
+        """Wyświetlanie pocisku na ekranie"""
+        pygame.draw.rect(self.screen, self.color, self.rect)
