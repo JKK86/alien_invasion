@@ -34,12 +34,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-
-            # Usunięcie pocisków które znajdują się poza ekranem
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):
@@ -73,6 +68,14 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Uaktualnienie położenia pocisków i usunięcie tych niewidocznych"""
+        self.bullets.update()
+        # Usunięcie pocisków które znajdują się poza ekranem
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Uaktualnianie obrazów na ekranie i przejścia do nowego ekranu"""
