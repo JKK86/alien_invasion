@@ -84,8 +84,19 @@ class AlienInvasion:
 
     def _create_fleet(self):
         """Utworzenie floty obcych"""
+        # Utworzenie obcego i obliczenie liczby obcych, którzy zmieszczą się w jednym rzędzie
+        # Odległość między obcymi przyjęto równą szerokości obcego
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - 2 * alien_width
+        number_aliens_x = available_space_x // (2 * alien_width)
+
+        # Utworzenie pierwszego rzędu floty obcych
+        for alien_number in range(number_aliens_x):
+            alien = Alien(self)
+            alien_x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien_x
+            self.aliens.add(alien)
 
     def _update_screen(self):
         """Uaktualnianie obrazów na ekranie i przejścia do nowego ekranu"""
