@@ -82,6 +82,9 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        # Sprawdzanie kolizji pocisków i obcych
+        # W przypadku trafienia usuwane są zarówno pocisk jak i obcy
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
     def _update_aliens(self):
         """Sprawdzanie czy flota obcych znajduje się przy krawędzi ekranu i uaktualnienie położenia obcych"""
@@ -114,7 +117,6 @@ class AlienInvasion:
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
         alien.rect.y = alien_height + 2 * alien_height * row_number
-        print(alien.x)
         self.aliens.add(alien)
 
     def _check_fleet_edges(self):
