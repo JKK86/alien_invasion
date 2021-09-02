@@ -43,9 +43,12 @@ class AlienInvasion:
         """Rozpoczęcie pętli głównej gry"""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
     def _check_events(self):
@@ -76,19 +79,22 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Reakcja na uderzenie obcego w statek"""
-        # Zmniejszenie liczby pozostałych do wykorzystania statków
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Zmniejszenie liczby pozostałych do wykorzystania statków
+            self.stats.ships_left -= 1
 
-        # Usunięcie pozostałych obcych i pocisków
-        self.aliens.empty()
-        self.bullets.empty()
+            # Usunięcie pozostałych obcych i pocisków
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # Utworzenie nowej floty i wyśrodkowanie statku
-        self._create_fleet()
-        self.ship.center_ship()
+            # Utworzenie nowej floty i wyśrodkowanie statku
+            self._create_fleet()
+            self.ship.center_ship()
 
-        # Wstrzymanie czasu
-        sleep(0.5)
+            # Wstrzymanie czasu
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
 
     def _check_aliens_bottom_screen(self):
         """Sprawdzenie czy obcy dotarł do dolnej krawędzi ekranu"""

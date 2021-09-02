@@ -19,6 +19,6 @@ class Settings:
 
         # Ustawienia dotyczące obcego
         self.alien_speed = 1.0
-        self.fleet_drop_speed = 50
+        self.fleet_drop_speed = 10
         # fleet_direction wynoszące 1 oznacza ruch w prawo, a -1 w lewo
         self.fleet_direction = 1
