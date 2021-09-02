@@ -90,6 +90,14 @@ class AlienInvasion:
         # Wstrzymanie czasu
         sleep(0.5)
 
+    def _check_aliens_bottom_screen(self):
+        """Sprawdzenie czy obcy dotarł do dolnej krawędzi ekranu"""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                self._ship_hit()
+                break
+
     def fire_bullet(self):
         """Utworzenie nowego pocisku i wyświetlenie go na ekranie"""
         if len(self.bullets) < self.settings.bullets_allowed:
@@ -123,6 +131,9 @@ class AlienInvasion:
         # Wykrywanie kolizji między statkiem a obcym
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
+
+        # Wykrywanie obcych docierających do dolnej krawędzi ekranu
+        self._check_aliens_bottom_screen()
 
     def _create_fleet(self):
         """Utworzenie floty obcych"""
