@@ -5,6 +5,7 @@ import pygame
 
 from alien import Alien
 from bullet import Bullet
+from button import Button
 from game_stats import GameStats
 from settings import Settings
 from ship import Ship
@@ -38,6 +39,10 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+
+        # Utworzenie przycisku Gra
+        self.play_button = Button(self, "Gra")
+
 
     def run_game(self):
         """Rozpoczęcie pętli głównej gry"""
@@ -191,6 +196,10 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
+
+        # Wyświetlanie przycisku uruchamiającego grę, wtedy gdy jest nieaktywna
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         # Wyświetlanie ostatnio zmodyfikowanego ekranu
         pygame.display.flip()
