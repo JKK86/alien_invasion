@@ -73,19 +73,7 @@ class AlienInvasion:
         """Rozpoczęcie nowej gry po kliknięciu przez użytkownika przycisku Gra"""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
-            self.stats.reset_stats()
-            self.stats.game_active = True
-
-            # Usunięcie zawartości list aliens i bullets
-            self.aliens.empty()
-            self.bullets.empty()
-
-            # Utworzenie nowej floty i wyśrodkowanie statku
-            self._create_fleet()
-            self.ship.center_ship()
-
-            # Ukrycie kursora myszy
-            pygame.mouse.set_visible(False)
+            self._start_game()
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -102,6 +90,20 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self.fire_bullet()
+        elif event.key == pygame.K_g and not self.stats.game_active:
+            self._start_game()
+
+    def _start_game(self):
+        self.stats.reset_stats()
+        self.stats.game_active = True
+        # Usunięcie zawartości list aliens i bullets
+        self.aliens.empty()
+        self.bullets.empty()
+        # Utworzenie nowej floty i wyśrodkowanie statku
+        self._create_fleet()
+        self.ship.center_ship()
+        # Ukrycie kursora myszy
+        pygame.mouse.set_visible(False)
 
     def _ship_hit(self):
         """Reakcja na uderzenie obcego w statek"""
