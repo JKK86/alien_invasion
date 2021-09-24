@@ -7,6 +7,7 @@ from alien import Alien
 from bullet import Bullet
 from button import Button
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from settings import Settings
 from ship import Ship
 
@@ -31,6 +32,8 @@ class AlienInvasion:
 
         # Utworzenie egzemplarza danych statystycznych dotyczących gry
         self.stats = GameStats(self)
+
+        self.scoreboard = Scoreboard(self)
 
         self.ship = Ship(self)
 
@@ -223,6 +226,9 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
+
+        # Wyświetlanie punktacji
+        self.scoreboard.show_score()
 
         # Wyświetlanie przycisku uruchamiającego grę, wtedy gdy jest nieaktywna
         if not self.stats.game_active:
