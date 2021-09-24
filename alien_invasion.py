@@ -101,6 +101,7 @@ class AlienInvasion:
         self.stats.reset_stats()
         self.settings.initialize_dynamic_settings()
         self.stats.game_active = True
+        self.scoreboard.prep_score()
         # Usunięcie zawartości list aliens i bullets
         self.aliens.empty()
         self.bullets.empty()
@@ -158,6 +159,12 @@ class AlienInvasion:
         # Sprawdzanie kolizji pocisków i obcych
         # W przypadku trafienia usuwane są zarówno pocisk jak i obcy
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        # Zwiększanie punktacji po zestrzeleniu obcego
+        if collisions:
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
+            self.scoreboard.prep_score()
+
         if not self.aliens:
             # Pozbycie się istniejących pocisków, przyśpieszenie gry i odtworzenie floty obcych
             self.bullets.empty()
