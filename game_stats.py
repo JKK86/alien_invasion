@@ -7,6 +7,7 @@ class GameStats:
         self.reset_stats()
         # Uruchomienie gry w stanie nieaktywnym
         self.game_active = False
+        self.high_score = 0
 
     def reset_stats(self):
         """Inicjalizacja danych statystycznych zmieniających się w czasie gry"""
