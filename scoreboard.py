@@ -3,6 +3,7 @@ import pygame.font
 
 class Scoreboard:
     """Klasa przeznaczona do przedstawianie informacji o punktacji"""
+
     def __init__(self, ai_game):
         """Inicjalizacja atrybutów dotyczących punktacji"""
         self.screen = ai_game.screen
@@ -44,3 +45,9 @@ class Scoreboard:
         """Wyświetlanie punktacji na ekranie"""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+
+    def check_high_score(self):
+        """Sprawdzenie czy pobity został najlepszy dotąd wynik"""
+        if self.stats.score > self.stats.high_score:
+            self.stats.high_score = self.stats.score
+            self.prep_high_score()
