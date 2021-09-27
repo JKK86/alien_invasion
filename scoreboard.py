@@ -18,6 +18,7 @@ class Scoreboard:
         # Przygotowanie początkowch obrazów z punktacją
         self.prep_score()
         self.prep_high_score()
+        self.prep_level()
 
     def prep_score(self):
         """Przekształcenie punktacji na wygenerowany obraz"""
@@ -42,12 +43,23 @@ class Scoreboard:
         self.high_score_rect.top = self.score_rect.top
 
     def show_score(self):
-        """Wyświetlanie punktacji na ekranie"""
+        """Wyświetlanie punktacji, liczby statków i aktualnego poziomu na ekranie"""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
 
     def check_high_score(self):
         """Sprawdzenie czy pobity został najlepszy dotąd wynik"""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
+
+    def prep_level(self):
+        """Przekształcenie aktualnego poziomy na wygenerowany obraz"""
+        level_str = str(self.stats.level)
+        self.level_image = self.font.render(level_str, True, self.text_color, self.settings.bg_color)
+
+        # Wyświetlanie aktualnego poziomu poniżej punktacji
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom + 10

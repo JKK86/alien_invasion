@@ -102,6 +102,7 @@ class AlienInvasion:
         self.settings.initialize_dynamic_settings()
         self.stats.game_active = True
         self.scoreboard.prep_score()
+        self.scoreboard.prep_level()
         # Usunięcie zawartości list aliens i bullets
         self.aliens.empty()
         self.bullets.empty()
@@ -171,6 +172,10 @@ class AlienInvasion:
             self.bullets.empty()
             self.settings.increase_speed()
             self._create_fleet()
+
+            # Aktualizacja numeru poziomu
+            self.stats.level += 1
+            self.scoreboard.prep_level()
 
     def _update_aliens(self):
         """Sprawdzanie czy flota obcych znajduje się przy krawędzi ekranu i uaktualnienie położenia obcych"""
